@@ -40,6 +40,7 @@ function skils() {
     const tehnologiesEnterest = document.querySelector('.technologies__interest');
 
     const animItemOffset = tehnologiesEnterest.getBoundingClientRect().top + scrollY;
+    const animItemHeight = tehnologiesEnterest.offsetHeight;
     let showAnim = false;
     let firstLoading = true;
 
@@ -63,18 +64,16 @@ function skils() {
         });
     }
     function animScrollEnterest() {
-        const animItemHeight = tehnologiesEnterest.offsetHeight;
 
-        if(scrollY > animItemOffset - (window.innerHeight - animItemHeight / 2) && !showAnim) {
-            showAnim = true;
+        if(scrollY > animItemOffset - animItemHeight * 4) {
+            removeEventListener('scroll', animScrollEnterest);
+            // showAnim = true;
             tehnologiesEnterest.style.cssText = 'transform: translateY(0); opacity: 1;';
-            if(firstLoading) {
-                initScale();
-                firstLoading = false;
-            }
-        } else if(scrollY < animItemOffset - (window.innerHeight - animItemHeight / 2) && showAnim) {
-            showAnim = false;
-            tehnologiesEnterest.style.cssText = 'transform: translateY(100); opacity: 0;';
+            initScale();
+            // if(firstLoading) {
+                
+            //     firstLoading = false;
+            // }
         }
     }
 }
@@ -84,7 +83,6 @@ function cardSkills() {
     const cardWrap = document.querySelector('.technologies__wrapper');
     const animItemHeight = cardWrap.offsetHeight;
     const animItemOffset = cardWrap.getBoundingClientRect().top + scrollY;
-    let showAnim = false;
 
     window.addEventListener('scroll', scrollHandlerCard)
 
@@ -100,23 +98,16 @@ function cardSkills() {
             card.style.transform ='translateX(0)';
         }, (+`${time}000` / 5))
     }
-    function animCardHide(card, time) {
-        setTimeout(() => {
-            card.style.opacity = '0';
-            card.style.transform ='translateX(30%)';
-        }, (+`${time}000` / 5))
-    }
+    // function animCardHide(card, time) {
+    //     setTimeout(() => {
+    //         card.style.opacity = '0';
+    //         card.style.transform ='translateX(30%)';
+    //     }, (+`${time}000` / 5))
+    // }
     function scrollHandlerCard() {
-        if(scrollY > animItemOffset - (window.innerHeight - animItemHeight / 2) && !showAnim) {
-            showAnim = true;
+        if(scrollY > animItemOffset - animItemHeight) {
+            removeEventListener('scroll', scrollHandlerCard);
             initCard();
-        } else if(scrollY < animItemOffset - (window.innerHeight - animItemHeight / 2) && showAnim) {
-            showAnim = false;
-            let time = 1;
-            for(let i = cards.length - 1; i >= 0; i--) {
-                animCardHide(cards[i], time);
-                time++;
-            }
         }
     }
 }
@@ -132,28 +123,17 @@ function experience() {
     
     const animItemHeight = experienceWrapper.offsetHeight;
     const animItemOffset = experienceWrapper.getBoundingClientRect().top + scrollY;
-    let showAnim = false;
 
     window.addEventListener('scroll', scrollHandlerExperience);
 
-    function processingClasses(element, time, clas, action='add', ...additionalClass) {
+    function processingClasses(element, time, clas, ...additionalClass) {
         for(let i = 0; i < element.length; i++) {
             setTimeout(() => {
-                switch(action) {
-                    case 'add':
-                        element[i].classList.add(clas, ...additionalClass);
-                        break;
-                    case 'remove':
-                        element[i].classList.remove(clas, ...additionalClass);
-                        break;
-                    default:
-                        return;
-                }
+                element[i].classList.add(clas, ...additionalClass);
             }, time);
         }
     }
     function processingAddClasses() {
-        showAnim = true;
         processingClasses(expListHeader, 500, 'experience__list-header-active');
         processingClasses(expListHeader, 700, 'experience__list-header-active-before');
         processingClasses(expList, 700, 'experience__list-active');
@@ -162,21 +142,10 @@ function experience() {
         processingClasses(expListLocation, 1000, 'experience__list-locations-active');
         processingClasses(expListText, 1300, 'experience__list-text-active');
     }
-    function processingClearClasses() {
-        showAnim = false;
-        processingClasses(expListText, 500, 'experience__list-text-active', 'remove');
-        processingClasses(expListLocation, 700, 'experience__list-locations-active', 'remove');
-        processingClasses(expListSubheader, 700, 'experience__list-subheader-active', 'remove');
-        processingClasses(expListIcon, 900, 'experience__list-icon-active', 'remove');
-        processingClasses(expList, 1000, 'experience__list-active', 'remove');
-        processingClasses(expListHeader, 1000, 'experience__list-header-active-before', 'remove');
-        processingClasses(expListHeader, 1300, 'experience__list-header-active', 'remove');
-    }
     function scrollHandlerExperience() {
-        if(scrollY > animItemOffset - animItemHeight && !showAnim) {
+        if(scrollY > animItemOffset - animItemHeight) {
+            removeEventListener('scroll', scrollHandlerExperience)
             processingAddClasses();
-        } else if(scrollY < animItemOffset - animItemHeight - (animItemHeight / 2) && showAnim) {
-            processingClearClasses();
         }
     }
 }
@@ -205,6 +174,7 @@ function portfolioLinkAnim() {
     };
     function scrollHendlerPortfolio() {
         if(scrollY > animItemOffset - animItemHeight) {
+            removeEventListener('scroll', scrollHendlerPortfolio);
             initShowPortfolio();
         }
     };
