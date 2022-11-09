@@ -2,7 +2,7 @@ workMenu();
 skils();
 cardSkills()
 experience();
-
+portfolioLinkAnim();
 
 function workMenu() {
     const promo = document.querySelector('.promo'),
@@ -153,6 +153,7 @@ function experience() {
         }
     }
     function processingAddClasses() {
+        showAnim = true;
         processingClasses(expListHeader, 500, 'experience__list-header-active');
         processingClasses(expListHeader, 700, 'experience__list-header-active-before');
         processingClasses(expList, 700, 'experience__list-active');
@@ -162,6 +163,7 @@ function experience() {
         processingClasses(expListText, 1300, 'experience__list-text-active');
     }
     function processingClearClasses() {
+        showAnim = false;
         processingClasses(expListText, 500, 'experience__list-text-active', 'remove');
         processingClasses(expListLocation, 700, 'experience__list-locations-active', 'remove');
         processingClasses(expListSubheader, 700, 'experience__list-subheader-active', 'remove');
@@ -171,12 +173,27 @@ function experience() {
         processingClasses(expListHeader, 1300, 'experience__list-header-active', 'remove');
     }
     function scrollHandlerExperience() {
-        if(scrollY > animItemOffset - (window.innerHeight - animItemHeight) && !showAnim) {
-            showAnim = true;
+        if(scrollY > animItemOffset - animItemHeight && !showAnim) {
             processingAddClasses();
-        } else if(scrollY < animItemOffset - (window.innerHeight - animItemHeight) && showAnim) {
-            showAnim = false;
+        } else if(scrollY < animItemOffset - animItemHeight - (animItemHeight / 2) && showAnim) {
             processingClearClasses();
         }
+    }
+}
+
+function portfolioLinkAnim() {
+    const porfolioLink = document.querySelectorAll('.portfolio__link');
+
+    let decr = porfolioLink.length / 2 - 1;
+    let time = 500;
+    for(let inc = porfolioLink.length / 2; inc < porfolioLink.length; inc++) {
+        setTimeout(() => {
+            porfolioLink[inc].classList.add('portfolio__link-active');
+        }, time);
+        time+= 200;
+        setTimeout(() => {
+            porfolioLink[decr].classList.add('portfolio__link-active');
+            decr--;    
+        }, time);
     }
 }
