@@ -1,8 +1,15 @@
+const dispensScroll = (animItemOffset, animItemHeight, initElementAnim) => () => {
+    if(scrollY > animItemOffset - animItemHeight) {
+        initElementAnim();
+    }
+};
+
 workMenu();
 skils();
-cardSkills()
+cardSkills();
 experience();
 portfolioLinkAnim();
+
 
 function workMenu() {
     const promo = document.querySelector('.promo'),
@@ -41,11 +48,8 @@ function skils() {
 
     const animItemOffset = tehnologiesEnterest.getBoundingClientRect().top + scrollY;
     const animItemHeight = tehnologiesEnterest.offsetHeight;
-    let showAnim = false;
-    let firstLoading = true;
 
     window.addEventListener('scroll', animScrollEnterest)
-
 
     function initScale() {
         scale.forEach((item, i) => {
@@ -60,20 +64,15 @@ function skils() {
                     item.textContent = numInit + '%';
                     scaleSpan[i].style.width = numInit + '%';
                 }
-            }, 20)
+            }, 20);
         });
     }
     function animScrollEnterest() {
 
         if(scrollY > animItemOffset - animItemHeight * 4) {
             removeEventListener('scroll', animScrollEnterest);
-            // showAnim = true;
             tehnologiesEnterest.style.cssText = 'transform: translateY(0); opacity: 1;';
             initScale();
-            // if(firstLoading) {
-                
-            //     firstLoading = false;
-            // }
         }
     }
 }
@@ -84,31 +83,22 @@ function cardSkills() {
     const animItemHeight = cardWrap.offsetHeight;
     const animItemOffset = cardWrap.getBoundingClientRect().top + scrollY;
 
-    window.addEventListener('scroll', scrollHandlerCard)
+    const initAnimation = dispensScroll(animItemOffset, animItemHeight, initCard);
+
+    window.addEventListener('scroll', initAnimation)
 
     function initCard() {
         cards.forEach((item, i) => {
             item.style.zIndex = cards.length - i;
             animCardShow(item, ++i);
         });
+        removeEventListener('scroll', initAnimation);
     }
     function animCardShow(card, time) {
         setTimeout(() => {
             card.style.opacity = '1';
             card.style.transform ='translateX(0)';
         }, (+`${time}000` / 5))
-    }
-    // function animCardHide(card, time) {
-    //     setTimeout(() => {
-    //         card.style.opacity = '0';
-    //         card.style.transform ='translateX(30%)';
-    //     }, (+`${time}000` / 5))
-    // }
-    function scrollHandlerCard() {
-        if(scrollY > animItemOffset - animItemHeight) {
-            removeEventListener('scroll', scrollHandlerCard);
-            initCard();
-        }
     }
 }
 
@@ -120,11 +110,12 @@ function experience() {
     const expListSubheader = document.querySelectorAll('.experience__list-subheader');
     const expListLocation = document.querySelectorAll('.experience__list-locations');
     const expListText = document.querySelectorAll('.experience__list-text');
-    
+
     const animItemHeight = experienceWrapper.offsetHeight;
     const animItemOffset = experienceWrapper.getBoundingClientRect().top + scrollY;
 
-    window.addEventListener('scroll', scrollHandlerExperience);
+    const initAnimation = dispensScroll(animItemOffset, animItemHeight, processingAddClasses);
+    window.addEventListener('scroll', initAnimation);
 
     function processingClasses(element, time, clas, ...additionalClass) {
         for(let i = 0; i < element.length; i++) {
@@ -134,6 +125,7 @@ function experience() {
         }
     }
     function processingAddClasses() {
+        removeEventListener('scroll', initAnimation);
         processingClasses(expListHeader, 500, 'experience__list-header-active');
         processingClasses(expListHeader, 700, 'experience__list-header-active-before');
         processingClasses(expList, 700, 'experience__list-active');
@@ -141,12 +133,6 @@ function experience() {
         processingClasses(expListSubheader, 1000, 'experience__list-subheader-active');
         processingClasses(expListLocation, 1000, 'experience__list-locations-active');
         processingClasses(expListText, 1300, 'experience__list-text-active');
-    }
-    function scrollHandlerExperience() {
-        if(scrollY > animItemOffset - animItemHeight) {
-            removeEventListener('scroll', scrollHandlerExperience)
-            processingAddClasses();
-        }
     }
 }
 
@@ -156,9 +142,11 @@ function portfolioLinkAnim() {
     const animItemHeight = portfolioWrapper.offsetHeight;
     const animItemOffset = portfolioWrapper.getBoundingClientRect().top + scrollY;
 
-    window.addEventListener('scroll', scrollHendlerPortfolio);
+    const initAnimation = dispensScroll(animItemOffset, animItemHeight, initShowPortfolio);
+    window.addEventListener('scroll', initAnimation);
 
     function initShowPortfolio() {
+        removeEventListener('scroll', initAnimation);
         let decr = porfolioLink.length / 2 - 1;
         let time = 500;
         for(let inc = porfolioLink.length / 2; inc < porfolioLink.length; inc++) {
@@ -171,11 +159,5 @@ function portfolioLinkAnim() {
                 decr--;    
             }, time);
         };
-    };
-    function scrollHendlerPortfolio() {
-        if(scrollY > animItemOffset - animItemHeight) {
-            removeEventListener('scroll', scrollHendlerPortfolio);
-            initShowPortfolio();
-        }
     };
 }
