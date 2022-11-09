@@ -7,6 +7,8 @@ const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const htmlmin = require('gulp-htmlmin');
 const jsmin = require('gulp-jsmin');
+const webpack = require('webpack-stream');
+
 // Static server
 gulp.task('server', function() {
     browserSync.init({
@@ -35,7 +37,7 @@ gulp.task('style', function() {
 gulp.task('watch', function() {
     gulp.watch("src/sass/**/*.+(sass|scss|css)", gulp.parallel('style'));
     gulp.watch("src/*.html").on('change', gulp.parallel('html'));
-    gulp.watch("src/js/**/*.js").on('change', gulp.parallel('scripts'));
+    gulp.watch("src/js/script.js").on('change', gulp.parallel('scripts'));
     gulp.watch("src/font/**/*").on('all', gulp.parallel('font'));
     gulp.watch("src/icons/**/*").on('all', gulp.parallel('icon'));
     gulp.watch("src/img/**/*").on('all', gulp.parallel('img'));
@@ -53,9 +55,13 @@ gulp.task('font', function() {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src("src/js/**/*.js")
-        .pipe(jsmin())
-        .pipe(rename({suffix: '.min'}))
+    return gulp.src("src/js/script.js")
+        .pipe(webpack({
+            mode: 'development',
+            output: {
+                filename: 'script.min.js'
+            }
+        }))
         .pipe(gulp.dest("dist/js"))
         .pipe(browserSync.stream());
 });
