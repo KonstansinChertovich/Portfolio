@@ -1,0 +1,271 @@
+@media (max-width: 1399px) {
+    .sidepanel {
+        display: none;
+    }
+}
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+    .about {
+        &__wrapper {
+            width: 950px;
+            grid-template-columns: 350px 1fr;
+            grid-template-rows: minmax(600px,auto);
+            column-gap: 30px;
+        }
+        &__points {
+            column-gap: 20px;
+            row-gap: 10px;
+        }
+    }
+    .experience {
+        &__wrapper {
+            grid-template-columns: repeat(2,345px);
+            justify-content: center;
+            column-gap: 160px;
+        }
+    }
+    .technologies {
+        &__wrapper {
+            grid-template-columns: repeat(auto-fill, 270px);
+        }
+        &__interest {
+            margin-top: 110px;
+            grid-template-columns: repeat(auto-fill,350px);
+            justify-content: space-around;
+        }
+    }
+    .portfolio {
+        &__wrapper {
+            grid-template-columns: repeat(3,280px);
+        }
+        &__link {
+            &:nth-child(4) {
+                grid-column: 3/4;
+                grid-row: 1/3;
+            }
+            &:nth-child(6) {
+                grid-column: 1/4;
+            }
+        }
+    }
+    .contacts {
+        &__wrapper {
+            grid-template-columns: 350px 585px;
+            column-gap: 25px;
+        }
+        &__form {
+            row-gap: 28px;
+        }
+    }
+}
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+    .title {
+        &_fz36 {
+            font-size: 28px;
+            line-height: 55px;
+        }
+        &_fz12 {
+            font-size: 12px;
+        }
+    }
+    .about {
+        &__wrapper {
+            width: 100%;
+            column-gap: 20px;
+        }
+        &__points {
+            margin-top: 20px;
+            padding-left: 15px;
+            grid-template-columns: 1fr;
+            grid-template-rows: minmax(100px,auto);
+            grid-auto-rows: minmax(100px,auto);
+            row-gap: 5px;
+        }
+        &__descr {
+            margin-top: 15px;
+        }
+    }
+    .experience {
+        &__wrapper {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 100px;
+        }
+    }
+    .portfolio {
+        &__wrapper {
+            grid-template-columns: repeat(2,280px);
+            gap: 10px;
+        }
+        &__link {
+            &:nth-child(4) {
+                grid-column: 2/3;
+                grid-row: 1/3;
+            }
+            &:nth-child(6) {
+                grid-column: 1/3;
+            }
+        }
+    }
+    .price {
+        &__wrapper {
+            grid-template-columns: repeat(2,280px);
+            grid-template-rows: 62px;
+            grid-auto-rows: 62px;
+            justify-content: space-between;
+        }
+    }
+    .contacts {
+        &__wrapper {
+            grid-template-columns: 585px;
+            grid-template-rows: auto;
+        }
+        &__photo {
+            display: none;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+    }
+    .about {
+        padding-top: 100px;
+        &__wrapper {
+            grid-template-columns: 1fr;
+            grid-template-rows: 340px auto;
+            column-gap: 0;
+            row-gap: 40px;
+        }
+        &__points {
+            padding-left: 0;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 15px;
+        }
+    }
+    .experience {
+        padding-top: 100px;
+        &__wrapper {
+            grid-template-columns: 380px;
+            column-gap: 0;
+            row-gap: 40px;
+        }
+    }
+    .portfolio {
+        &__wrapper {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    .price {
+        &__wrapper {
+            margin: 0;
+            margin-top: 20px;
+            grid-template-columns: 280px;
+            grid-template-rows: 62px;
+            grid-auto-rows: 62px;
+            justify-content: center;
+        }
+    }
+    .contacts {
+        &__wrapper {
+            grid-template-columns: 540px;
+        }
+        &__form {
+            grid-template: 45px 190px 45px / repeat(2, 260px);
+        }
+    }
+}
+@media (max-width: 576px) {
+    .container {
+        width: 100%;
+        padding: 0 10px;
+    }
+    .hamburger {
+        top: 20px;
+        right: 20px;
+    }
+    .menu__panel {
+        width: 250px;
+        padding-left: 55px;
+    }
+    .promo {
+        &_title{
+            width: 100%;
+            font-size: 28px;
+            line-height: 35px;
+        }
+        &__btn {
+            margin-top: 30px;
+        }
+    }
+    .title {
+        &_fz36 {
+            font-size: 24px;
+            line-height: 60px;
+        }
+    }
+    .about {
+        padding-top: 40px;
+        &__points {
+            grid-template-columns: 275px;
+        }
+    }
+    .experience {
+        padding-top: 40px;
+        &__wrapper {
+            padding-top: 40px;
+            grid-template-columns: 265px;
+        }
+    }
+    .technologies {
+        &__interest {
+            margin-top: 100px;
+            grid-template-columns: repeat(auto-fill, 280px);
+        }
+    }
+    .portfolio {
+        &__wrapper {
+            grid-template-columns: 280px;
+            row-gap: 20px;
+        }
+        &__link {
+            &:nth-child(4) {
+                grid-column: 1/2;
+                grid-row: 1/2;
+            }
+            &:nth-child(6) {
+                grid-column: 1/2;
+            }
+        }
+    }
+    .contacts {
+        padding: 50px 0;
+        &__wrapper {
+            grid-template-columns: 280px;
+            grid-template-rows: auto;
+        }
+        &__form {
+            grid-template: 45px 45px 143px 45px 45px / 1fr;
+        }
+        &__textarea {
+            grid-column: unset;
+        }
+        &__trigers {
+            grid-column: unset;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(2, 45px);
+            row-gap: 10px;
+        }
+        &__btn {
+            width: 100%;
+        }
+        &__polici {
+            font-size: 11px;
+        }
+    }
+}

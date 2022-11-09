@@ -1,0 +1,97 @@
+.technologies {
+    padding-top: 120px;
+    &_title {
+        text-align: center;
+        &::before {
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    &_header {
+        text-align: center;
+    }
+    &_divaider {
+        margin: 0 auto;
+    }
+    &__wrapper {
+        margin-top: 60px;
+        display: grid;
+        grid-template-columns: repeat(4, 270px);
+        grid-template-rows: minmax(270px, auto);
+        grid-auto-rows: minmax(270px, auto);
+        gap: 13px;
+        justify-content: center;
+        overflow: hidden;
+    }
+    &__skills {
+        background-color: white;
+        padding: 30px 30px 25px 40px;
+        border: 1px solid black;
+        transform: translateX(-30%);
+        opacity: 0;
+        transition: all .8s;
+    }
+    &__img {
+        height: 66px;
+    }
+    &__text {
+        margin-top: 20px;
+    }
+    &__descr {
+        margin-top: 15px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #000000;
+    }
+    &__interest {
+        margin-top: 120px;
+        display: grid;
+        grid-template-columns: repeat(3, 350px);
+        grid-template-rows: 70px;
+        grid-auto-rows: 70px;
+        justify-content: space-between;
+        row-gap: 30px;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: all 1s;
+    }
+    &__domain {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        &-wrap {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+        }
+    }
+    &__scale {
+        position: relative;
+        align-self: end;
+        height: 14px;
+        width: 100%;
+        background: #E8E4DE;
+        border-radius: 4px;
+        grid-column: 1/3;
+        span {
+            position: absolute;
+            height: 100%;
+            background: $main-color;
+            border-radius: 4px;
+        }
+        &-descr {
+            align-self: center;
+            padding-left: 14px;
+            @include circle;
+            &:before {
+                top: -8px;
+                left: 0;
+            }
+        }
+        &-number {
+            align-self: center;
+            justify-self: end;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+.promo {
+    position: relative;
+    height: 100vh;
+    background: url('../img/promo_bg.jpg') no-repeat 50%/cover;
+    padding-top: 240px;
+    &_title {
+        margin-top: 10px;
+        width: 535px;
+        &-mod {
+            padding-left: 10px;
+            color: #fff;
+            z-index: 3;
+            &::before {
+                top: -7px;
+                left: 0;
+            }
+        }
+    }
+    &__btn {
+        width: 250px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__link {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        color: #FFFFFF;
+        &:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}

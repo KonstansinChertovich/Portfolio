@@ -1,0 +1,8 @@
+.btn {
+    padding: 12px 25px;
+    background-color: $main-color;
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+}
